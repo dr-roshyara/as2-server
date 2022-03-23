@@ -18,8 +18,6 @@
     php artisan migrate
     php artisan serve 
 
-##  Make an User Observer 
-    php artisan make:observer UserObserver --model=User
 
 ##  Install AS2 server : PHPAS2
     
@@ -71,6 +69,39 @@
             $table->foreign('receiver_id')->references('id')->on('as_partners');
     
         
-##  
+##      Extend the AsPartnar and AsMessage Interface  as AsPartner and AsMessage Model 
 
+        -   Strat the AsPartner model as follwiong 
+                use AS2\MessageInterface;
+                use Illuminate\Database\Eloquent\Factories\HasFactory;
+                use Illuminate\Database\Eloquent\Model;
+                use AS2\PartnerInterface;
+
+                class AsPartner extends Model implements PartnerInterface
+                {
+                    ... 
+                    ... 
+                }
+        -  Start the AsMessage Model as follwowing 
+                namespace App\Models;
+                use AS2\MessageInterface;
+                use AS2\PartnerInterface;
+                use Illuminate\Database\Eloquent\Factories\HasFactory;
+                use Illuminate\Database\Eloquent\Model;
+                use Illuminate\Database\Eloquent\Concerns\HasEvents;
+
+                class AsMessage extends Model implements MessageInterface
+                {
+                    ....
+                    ....
+                }
+
+##  Make an User Observer  the AsMessage Model  
+        
+        php artisan make:observer AsMessageObserver --model=AsMessage
+
+##  Register the  AsMessage Observer in EventServiceProvider.php 
+        To register an observer, you need to call the observe method on the model you wish to observe. You may register observers in the boot method of your application's 
+        App\Providers\EventServiceProvider 
+        service provider:
 
