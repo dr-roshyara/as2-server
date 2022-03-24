@@ -101,7 +101,29 @@
         php artisan make:observer AsMessageObserver --model=AsMessage
 
 ##  Register the  AsMessage Observer in EventServiceProvider.php 
-        To register an observer, you need to call the observe method on the model you wish to observe. You may register observers in the boot method of your application's 
+
+        - To register an observer, you need to call the observe method on the model you wish to observe. You may register observers in the boot method of your application's 
         App\Providers\EventServiceProvider 
         service provider:
 
+        - Add the follwoing line at the top of  App\Providers\EventServiceProvider
+         use App\Observers\AsMessageObserver;
+         
+        - Edit the boot function as following 
+                public function boot()
+                {
+                        //
+                        //AsMessage Observer 
+                        AsMessage::observe(AsMessageObserver::class);
+                }
+
+
+##      Exclude As2 server URIs From CSRF Protection
+
+        - Create middleware 
+          php artisan make:middleware VerifyCsrfToken
+        - Add the following line of code to the middleware 
+          protected $except = [
+             '/as2Interface/receive'
+          ];
+           
