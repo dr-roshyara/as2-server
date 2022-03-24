@@ -134,5 +134,20 @@
         - Add, create and save message as showin in the repository 
         - Create findPartnerById function in the AsPartner Repository 
 
+##      Bind the interface and the implementation
+        The last thing we need to do is bind OrderRepository to PartnerRepositoryInterface and AsMessageRepositoryInterface in Laravel's Service Container; we do this via a Service Provider. Create one using the following command.
+        
+        - Create RepositoryService provider 
+          php artisan make:provider RepositoryServiceProvider
+
+        - Register the RepositoryServiceProvider in  config/app.php  as below 
+                 ...
+                 App\Providers\JetstreamServiceProvider::class,
+                /**
+                * custom Service Providers 
+                */
+                App\Providers\RepositoryServiceProvider::class,
+
+        
 
            

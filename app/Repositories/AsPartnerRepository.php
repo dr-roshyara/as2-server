@@ -8,6 +8,13 @@ use AS2\PartnerRepositoryInterface;
 
 class AsPartnerRepository implements PartnerRepositoryInterface
 {
+    
+    
+    private PartnerRepositoryInterface $asPartnerRepository;
+    public function __construct(PartnerRepositoryInterface $asPartnerRepository)
+    {
+           $this->asPartnerRepository =$asPartnerRepository;
+    }
 
     /**
      * @param  string  $id
