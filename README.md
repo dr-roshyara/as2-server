@@ -102,13 +102,14 @@
 
 ##  Register the  AsMessage Observer in EventServiceProvider.php 
 
-        - To register an observer, you need to call the observe method on the model you wish to observe. You may register observers in the boot method of your application's 
+        - To register an observer, you need to call the observe method on the model you wish to observe. 
+        You may register observers in the boot method of your application's 
         App\Providers\EventServiceProvider 
         service provider:
 
         - Add the follwoing line at the top of  App\Providers\EventServiceProvider
          use App\Observers\AsMessageObserver;
-         
+
         - Edit the boot function as following 
                 public function boot()
                 {
@@ -126,4 +127,12 @@
           protected $except = [
              '/as2Interface/receive'
           ];
+
+##      Create Repositories for two models : AsMesasge and AsPartner 
+
+        - create an folder app\Repositories  in app folder 
+        - Add, create and save message as showin in the repository 
+        - Create findPartnerById function in the AsPartner Repository 
+
+
            
