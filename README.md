@@ -21,11 +21,11 @@
 
 ##  Install AS2 server : PHPAS2
     
-    composer require tiamo/phpas2 --with-all-dependencies
-    php artian make:model AsMessage -mr 
-    php artian make:model AsPartner -mr 
-    php artisan make:migration add_more_column_to_asMessages
-    #Add the the following columns to table as_messages
+        composer require tiamo/phpas2 --with-all-dependencies
+        php artian make:model AsMessage -mr 
+        php artian make:model AsPartner -mr 
+        php artisan make:migration add_more_column_to_asMessages
+        #Add the the following columns to table as_messages
             $table->string('id')->primary();
             $table->string('direction')->nullable();
             $table->string('sender_id');
@@ -42,7 +42,8 @@
             $table->boolean('encrypted')->nullable();
             $table->boolean('compressed')->nullable();
             $table->timestamps();
-    #Add the follwoing columns to the table as_partner
+           
+        #Add the follwoing columns to the table as_partner
              $table->string('id')->primary();
             $table->string('email')->unique();
             $table->string('target_url');
@@ -64,7 +65,9 @@
             $table->string('mdn_subject');
             $table->string('mdn_options');
             $table->timestamps();
-    #Add two foreign keys to the table message i.e. (add_more_column_to_as_messages.php file in migration )
+
+        #Add two foreign keys to the table message i.e. (add_more_column_to_as_messages.php file in migration )
+
             $table->foreign('sender_id')->references('id')->on('as_partners');
             $table->foreign('receiver_id')->references('id')->on('as_partners');
     
@@ -76,7 +79,6 @@
                 use Illuminate\Database\Eloquent\Factories\HasFactory;
                 use Illuminate\Database\Eloquent\Model;
                 use AS2\PartnerInterface;
-
                 class AsPartner extends Model implements PartnerInterface
                 {
                     ... 
@@ -133,6 +135,7 @@
         - create an folder app\Repositories  in app folder 
         - Add, create and save message as showin in the repository 
         - Create findPartnerById function in the AsPartner Repository 
+        -By creating repository and RepositoryInterface, you  develop the software based on the RepositoryInterface but define the functions locally in reposity. That means When you use the application in Controller, then you use RepositoryInterfence not the repository. However the RepositoryInterefence directs to the Repository. 
 
 ##      Bind the interface and the implementation
         The last thing we need to do is bind OrderRepository to PartnerRepositoryInterface and AsMessageRepositoryInterface in Laravel's Service Container; we do this via a Service Provider. Create one using the following command.
@@ -148,6 +151,11 @@
                 */
                 App\Providers\RepositoryServiceProvider::class,
 
+ ##      Creation of As2 Service.
         
+        - If you want to seperate the tasks of controllers and write code        
+          transparently, you need Service class. Here also we want to craete As2Services
+        - Create a directory Services in app\Services 
+        - Create As2SenderService.php file 
 
            
