@@ -8,14 +8,17 @@ use App\Models\AsMessage;
 //use App\Events\MessageSaved;
 use Illuminate\Support\Str;
 
+
+
+
 class AsMessageRepository implements MessageRepositoryInterface
 {
-    private MessageRepositoryInterface $messageRepository;
-    public function __construct(MessageRepositoryInterface $messageRepository)
+    private  $asMessage;
+    public function __construct(AsMessage  $asMessage)
     {
-           $this->messageRepository =$messageRepository;
+           $this->asMessage =$asMessage;
     }
-    
+
     /**
      * @param string $id
      *

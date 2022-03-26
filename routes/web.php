@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Http\Controllers\As2Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +27,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::post('/test/as-send', [As2Controller::class, 'send']);
+Route::post('/as2Interface/receive', [As2Controller::class, 'receive']);
+Route::get('/test/as-get', [As2Controller::class, 'index']);

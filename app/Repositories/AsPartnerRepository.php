@@ -3,17 +3,16 @@
 namespace App\Repositories;
 
 use App\Models\AsPartner;
-use App\Models\Partner;
 use AS2\PartnerRepositoryInterface;
 
 class AsPartnerRepository implements PartnerRepositoryInterface
 {
     
     
-    private PartnerRepositoryInterface $asPartnerRepository;
-    public function __construct(PartnerRepositoryInterface $asPartnerRepository)
+    private  $asPartner;
+    public function __construct(AsPartner $asPartner)
     {
-           $this->asPartnerRepository =$asPartnerRepository;
+           $this->asPartner =$asPartner;
     }
 
     /**
