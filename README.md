@@ -80,16 +80,16 @@
                apt-get install openssl
 
         - Use then the following commands one by one 
-                openssl genrsa -aes256 -passout pass:gsahdg -out as2-server.pass.key 4096
+        openssl genrsa -aes256 -passout pass:gsahdg -out as2-server.pass.key 4096
 
-        	openssl rsa -passin pass:gsahdg -in as2-server.pass.key -out as2-server.key
+        openssl rsa -passin pass:gsahdg -in as2-server.pass.key -out as2-server.key
 
-        	openssl req -new -key server.key -out as2-server.csr
+        openssl req -new -key server.key -out as2-server.csr
 
-        	openssl x509 -req -sha256 -days 365 -in as2-server.csr -signkey as2-server.key -out as2-server.crt
+        openssl x509 -req -sha256 -days 365 -in as2-server.csr -signkey as2-server.key -out as2-server.crt
 
-                openssl x509 -req -sha256 -days 365 -in as2-server.csr -signkey as2-server.key -out storage/ssh-key/as2-server.crt
-                
+        openssl x509 -req -sha256 -days 365 -in as2-server.csr -signkey as2-server.key -out storage/ssh-key/as2-server.crt
+
         - Now finally you get two files which are saved in 
           storage/ssh-key/as2-server.cert 
           storage/ssh-key/as2-server.csr                    
