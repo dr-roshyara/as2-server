@@ -71,7 +71,29 @@
             $table->foreign('sender_id')->references('id')->on('as_partners');
             $table->foreign('receiver_id')->references('id')->on('as_partners');
     
-        
+##      Create Certificates 
+        In order to create the As2 Server, you need to create the certificates . You can do it using ssl
+
+        -Check if openssl is installed 
+                which openssl        
+        - If  openssl is not installed,  you can install with the  following command 
+               apt-get install openssl
+
+        - Use then the following commands one by one 
+                openssl genrsa -aes256 -passout pass:gsahdg -out as2-server.pass.key 4096
+
+        	openssl rsa -passin pass:gsahdg -in as2-server.pass.key -out as2-server.key
+
+        	openssl req -new -key server.key -out as2-server.csr
+
+        	openssl x509 -req -sha256 -days 365 -in as2-server.csr -signkey as2-server.key -out as2-server.crt
+
+                openssl x509 -req -sha256 -days 365 -in as2-server.csr -signkey as2-server.key -out storage/ssh-key/as2-server.crt
+                
+        - Now finally you get two files which are saved in 
+          storage/ssh-key/as2-server.cert 
+          storage/ssh-key/as2-server.csr                    
+         
 ##      Extend the AsPartnar and AsMessage Interface  as AsPartner and AsMessage Model 
 
         -   Strat the AsPartner model as follwiong 
