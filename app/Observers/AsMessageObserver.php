@@ -82,6 +82,20 @@ class AsMessageObserver
 
             $asMessage->setStatus('processed');
             $asMessage->save();
+
+           /***
+            * 
+            *Here you can proceed the received message 
+            *The received message has payload. Payload has header 
+            * and the message. The message is written in Base64 binary message.
+            * You can decode it and then save it as the corresponding file. 
+            * PHP has a nice function called : 
+            *base64_decode(string $string, bool $strict = false): string|false
+            *https://www.php.net/manual/en/function.base64-encode.php
+            *https://www.php.net/manual/en/function.base64-decode.php
+            *https://www.base64decode.org/
+            *
+             */ 
         }
     }
 }

@@ -18,6 +18,7 @@ use App\Services\As2SenderService;
 use AS2\MessageRepositoryInterface;
 // use App\Repositories\PartnerRepository;
 use AS2\PartnerRepositoryInterface;
+use Illuminate\Support\Facades\Log;
 
 class As2Controller extends BaseController
 {
@@ -36,11 +37,13 @@ class As2Controller extends BaseController
      * Make controller
      * 
      *  */
-    public function __construct(PartnerRepositoryInterface $as2PartnerRepository, MessageRepositoryInterface $as2MessageRepository)
+    public function __construct(PartnerRepositoryInterface $as2PartnerRepository, 
+    MessageRepositoryInterface $as2MessageRepository)
     {
        
 
         $this->partnerRepository = $as2PartnerRepository;
+        
         $this->messageRepository = $as2MessageRepository;
         $this->manager = new Management();
 
@@ -51,7 +54,14 @@ class As2Controller extends BaseController
             $this->partnerRepository,
             $this->messageRepository
         );
-        dd($this->senderService);
+        // dd( public_path("/test/test.txt"));
+        // dd("testing at last");
+        $response = $this->senderService->sendFile('Partner_Nextred', public_path("/test/test.txt"));
+        // $response =$this->senderService->sendFile((', $request->get('filePath'));
+        // dd($response);
+        dd("TESTing As2 Server");
+        // var_dump($this->server);
+        // dd($this->senderService);
     }
 
    public function send(Request $request)
@@ -64,6 +74,7 @@ class As2Controller extends BaseController
 
 
     public function receive(ServerRequestInterface $request){
+        Log::info(" Testing  as2 server "); 
         return $this->server->execute($request);
     }
     public function  index (){

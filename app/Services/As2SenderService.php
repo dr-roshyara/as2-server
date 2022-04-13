@@ -36,15 +36,18 @@ class As2SenderService
 
 
     public function sendFile(string $receiverId, string $filePath)
-    {
-        if(!env('SENDER_ID', false)){
-            throw new \RuntimeException(
-                sprintf('SENDER_ID missing in .env file.')
-            );
-        }
-
+    {   
+        // if(!env('SENDER_ID', false)){
+        //     throw new \RuntimeException(
+        //         sprintf('SENDER_ID missing in .env file.')
+        //     );
+        // }
+        //  dd("TEST");
         $senderId = env('SENDER_ID', false);
-
+        // dd($senderId);
+        // $senderId = env('test@test.de', false);
+        $senderId ="Partner_Nextrend_Local";
+        $receiverId ="Partner_Nextred";
         if (! empty($filePath)) {
             if (! file_exists($filePath)) {
                 throw new \RuntimeException(
@@ -61,12 +64,12 @@ class As2SenderService
                 Content-id: <test@test.com>
                 
                 ISA*00~
-MSG;
+                MSG;
         }
 
         $sender = $this->as2PartnerRepository->findPartnerById($senderId);
         $receiver = $this->as2PartnerRepository->findPartnerById($receiverId);
-
+        // dd($sender);
         // Initialize New Message
         $messageId = Utils::generateMessageID($sender);
 
@@ -74,7 +77,7 @@ MSG;
         $message->setMessageId($messageId);
         $message->setSender($sender);
         $message->setReceiver($receiver);
-
+     
         $this->as2MessageRepository->saveMessage($message);
         $message = $this->as2MessageRepository->findMessageById($messageId);
 
@@ -84,8 +87,9 @@ MSG;
         } else {
             $payload = $this->manager->buildMessageFromFile($message, $filePath);
         }
-
-
+       
+        // dd($message);
+        // dd ("tesst");
         // Try to send a message
         $this->manager->sendMessage($message, $payload);
         $this->as2MessageRepository->saveMessage($message);
