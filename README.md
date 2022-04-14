@@ -1,7 +1,18 @@
 #   AS2 Server implementation in Laravel 
+##  Clone this project 
+    You can use AS2 Server by cloning this project directly. 
+     
+     -Clone the project 
+     git clone https://github.com/dr-roshyara/as2-server.git
+     -You can also download the compressed file by clicking the follwoing link 
+     https://github.com/dr-roshyara/as2-server/archive/refs/heads/main.zip
+
+#  Diployment of As2 Server from Scratch 
+
 ##  Install laravel 
 
     composer create-project laravel/laravel as2-server 
+    cd as2-server
     composer isntall 
     composer update 
 
